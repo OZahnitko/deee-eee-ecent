@@ -12,35 +12,44 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
+      # - name: Setup Terraform
+      #   uses: hashicorp/setup-terraform@v1
+      #   with:
+      #     terraform_wrapper: false
+
+      # - name: Format Terraform configuration
+      #   id: fmt
+      #   working-directory: ./terraform
+      #   run: terraform fmt
+
+      # - name: Initialize Terraform
+      #   id: init
+      #   working-directory: ./terraform
+      #   run: terraform init
+
+      # - name: Validate Terraform configuration
+      #   id: validate
+      #   working-directory: ./terraform
+      #   run: terraform validate
+
+      # - name: Plan Terraform configuration
+      #   id: plan
+      #   working-directory: ./terraform
+      #   run: terraform plan
+
+      # - name: Apply Terraform configuration
+      #   id: apply
+      #   working-directory: ./terraform
+      #   run: terraform apply -auto-approve
+
+      - name: Cache node_modules
+        uses: actions/setup-node@v2
         with:
-          terraform_wrapper: false
+          node-version: "14"
+          cache: "npm"
 
-      - name: Format Terraform configuration
-        id: fmt
-        working-directory: ./terraform
-        run: terraform fmt
+      - name: Install dependencies
+        run: npm install
 
-      - name: Initialize Terraform
-        id: init
-        working-directory: ./terraform
-        run: terraform init
-
-      - name: Validate Terraform configuration
-        id: validate
-        working-directory: ./terraform
-        run: terraform validate
-
-      - name: Plan Terraform configuration
-        id: plan
-        working-directory: ./terraform
-        run: terraform plan
-
-      - name: Apply Terraform configuration
-        id: apply
-        working-directory: ./terraform
-        run: terraform apply -auto-approve
-
-      - name: List where I am
-        run: ls -la
+      - name: Build app
+        run: npm run build
