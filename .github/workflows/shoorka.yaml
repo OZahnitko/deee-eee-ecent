@@ -53,3 +53,6 @@ jobs:
 
       - name: Build app
         run: npm run build
+
+      - name: Where am i
+        run: cd ./build && ls -la
