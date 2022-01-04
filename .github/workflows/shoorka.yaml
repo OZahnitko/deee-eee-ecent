@@ -55,4 +55,4 @@ jobs:
         run: npm run build
 
       - name: Push site
-        run: aws s3 sync ./build s3://$(terraform output -raw bucket_name)
+        run: aws s3 sync ./build s3://shoorkathevarenik.com
